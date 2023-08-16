@@ -1,10 +1,10 @@
-# 不是我写的，不是我写的，不是我写的！在作者的基础上仅仅修改了关注数变为1个人，如有侵权请提issue
+
 /**
  作者：临渊
  日期：6-15
  网站：科技玩家
  功能：签到、关注
- 变量：kjwj='账号&密码'  多个账号用换行分割 
+ 变量：kjwj=  账号&密码   多个账号用换行分割 
  定时：一天一次
  cron：10 10 * * *
  因为用Leaf大佬的会莫名其妙报错，所以就用Leaf大佬的源码改了一下，感谢Leaf大佬的源码（大佬的代码真优雅）
@@ -101,7 +101,7 @@
                 "User-Agent": "Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36",
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: `nickname=&username=${kjwj[0]}&password=${kjwj[1]}&code=&img_code=&invitation_code=&token=&smsToken=&luoToken=&confirmPassword=&loginType=`,
+              body: `nickname=&username=${encodeURIComponent(kjwj[0])}&password=${encodeURIComponent(kjwj[1])}&code=&img_code=&invitation_code=&token=&smsToken=&luoToken=&confirmPassword=&loginType=`,
         }
 
         if (debug) {
