@@ -1,7 +1,3 @@
-# @author Sten
-# 作者仓库:https://github.com/aefa6/QinglongScript.git
-# 觉得不错麻烦点个star谢谢
-0 12 * * *
 
 
 
