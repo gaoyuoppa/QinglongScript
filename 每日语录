@@ -3,25 +3,29 @@ import json
 import notify
 
 api = ""
-count = 3  # 相同类型推文的数量，默认是两条
+count = 2  # 相同类型推文的数量，默认是两条
 
-pyurl = f'https://apis.tianapi.com/pyqwenan/index?key={api}'  # 朋友圈文案
-hsurl = f'https://apis.tianapi.com/hsjz/index?key={api}'  # 失恋分手句子
-caurl = f'https://apis.tianapi.com/caihongpi/index?key={api}'  # 彩虹屁
-tiurl = f'https://apis.tianapi.com/tiangou/index?key={api}'  # 舔狗日志
-duurl = f'https://apis.tianapi.com/dujitang/index?key={api}'  # 毒鸡汤
-zhurl = f'https://apis.tianapi.com/zhanan/index?key={api}'  # 渣男语录
-zaurl = f'https://apis.tianapi.com/zaoan/index?key={api}'  # 早安心语
-waurl = f'https://apis.tianapi.com/wanan/index?key={api}'  # 晚安心语
-saurl = f'https://apis.tianapi.com/saylove/index?key={api}'  # 土味情话
+url_dict = {
+    '朋友圈文案': f'https://apis.tianapi.com/pyqwenan/index?key={api}',
+    '失恋分手句子': f'https://apis.tianapi.com/hsjz/index?key={api}',
+    '彩虹屁': f'https://apis.tianapi.com/caihongpi/index?key={api}',
+    '舔狗日志': f'https://apis.tianapi.com/tiangou/index?key={api}',
+    '毒鸡汤': f'https://apis.tianapi.com/dujitang/index?key={api}',
+    '渣男语录': f'https://apis.tianapi.com/zhanan/index?key={api}',
+    '早安心语': f'https://apis.tianapi.com/zaoan/index?key={api}',
+    '晚安心语': f'https://apis.tianapi.com/wanan/index?key={api}',
+    '土味情话': f'https://apis.tianapi.com/saylove/index?key={api}'
+}
 
-urls = [pyurl, zhurl, zaurl, waurl, saurl]  # 按照格式填写你要推送的内容对应的url，默认是朋友圈文案、舔狗日志和毒鸡汤
+selected_urls = ['朋友圈文案', '渣男语录', '早安心语', '晚安心语', '土味情话']  # 记录要访问的URL标识符
 
 contents = ""
-for url in urls:
-    for i in range(count):
-        response = requests.get(url)
-        data = json.loads(response.text)
-        contents += data['result']['content'] + "\n" + "\n"
+for url_id in selected_urls:
+    url = url_dict.get(url_id)
+    if url:
+        for i in range(count):
+            response = requests.get(url)
+            data = json.loads(response.text)
+            contents += f"[{url_id}] {data['result']['content']}\n\n"
 
 notify.send("语录", contents)
